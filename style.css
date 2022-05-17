@@ -1,0 +1,60 @@
+* {
+    font-family: Times, "Times New Roman", Georgia, serif;
+    color:white;
+    text-align:center;
+}
+body {
+    background-color: black;
+}
+
+header {
+    padding:5px;
+    display: flex;
+    justify-content: center;
+    gap:30px;
+}
+
+.header-img img {
+    width:70px;
+}
+
+.select {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.select button {
+    width: 200px;
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: black;
+    border:none;
+}
+
+.select button:hover {
+    border:solid white;
+}
+
+.select #rock {
+    background-image: url("img/rock.png");
+}
+
+.select #paper {
+    background-image: url("img/paper.png");
+}
+
+.select #scissors {
+    background-image: url("img/scissors.png");
+}
+
+.display {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.display img {
+    width:100px;
+    height: 150px;
+}

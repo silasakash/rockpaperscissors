@@ -5,19 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
+    <link href="style.css" rel="stylesheet">
     <title>Rock Paper Scissors</title>
 </head>
 <body>
     <header>
+        <div class="header-img"><img src="img/rps-header.png" alt="rock paper scissors with hand"></div>
         <h1>Rock, Paper, Scissors, Shoot!</h1>
     </header>
     <section class="gameplace">
         <!-- Contains the game -->
-        <div class="select"></div>
-        <div class="display"></div>
+        <h2>Choose Your Weapon!</h2>
+        <div class="select">
+            <button id="rock"></button>
+            <button id="paper"></button>
+            <button id="scissors"></button>
+        </div>
+        <div class="display">
+            <div id="human">
+                <h3>YOU</h3>
+                <img src="img/human.png" alt="human">
+            </div>
+            <div id="computer">
+                <h3>COMPUTER</h3>
+                <img src="img/robot.png" alt="a robot">
+            </div>
+        </div>
     </section>
     <footer>
-        <p>&#169; 2020 Made by Akash Silas for The Odin Project</p>
+        <p>&#169; 2022 Made by Akash Silas for The Odin Project</p>
     </footer>
 </body>
 </html>

@@ -53,11 +53,11 @@ function playRound(playerSelection,computerSelection) {
 function game() {
     playerScore = 0;
     computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        console.log(playRound());
-        console.log("Player Score = " + playerScore);
-        console.log("Computer Score = " + computerScore);
-    }
+    // for (let i = 0; i < 5; i++) {
+    //     console.log(playRound());
+    //     console.log("Player Score = " + playerScore);
+    //     console.log("Computer Score = " + computerScore);
+    // }
     if (playerScore == computerScore) {
         return "It's a Tie"
     }
