@@ -58,3 +58,8 @@ header {
     width:100px;
     height: 150px;
 }
+
+.scoreboard {
+    display: flex;
+    align-items: center;
+}

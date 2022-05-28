@@ -7,67 +7,91 @@ function computerPlay() {
 }
 
 function playRound(playerSelection,computerSelection) {
-    selection = prompt("Rock,paper or Scissors?");
-    playerSelection = selection.toLowerCase();
-    computerSelection = computerPlay();
     if (playerSelection == computerSelection) {
-        playerScore = ++playerScore;
-        computerScore = ++computerScore;
-        return "It's a Tie!"
+        document.getElementById("commentaryline").innerHTML = "It's a Tie!";
     }
     else if(playerSelection == "rock") {
         if (computerSelection == "paper") {
             computerScore = ++computerScore;
-            return "You Lose! Paper beats Rock"
+            document.getElementById("commentaryline").innerHTML = "You Lose! Paper beats Rock";
+            document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
+            document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
         }
         else if (computerSelection == "scissors") {
             playerScore = ++playerScore;
-            return "You Win! Rock beats Scissors"
+            document.getElementById("commentaryline").innerHTML = "You Win! Rock beats Scissors";
+            document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
+            document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
         }
     }
     else if(playerSelection == "paper") {
         if (computerSelection == "rock") {
             playerScore = ++playerScore;
-            return "You Win! Paper beats Rock"
+            document.getElementById("commentaryline").innerHTML = "You Win! Paper beats Rock";
+            document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
+            document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
         }
         else if (computerSelection == "scissors") {
             computerScore = ++computerScore;
-            return "You Lose! Scissors beats Paper"
+            document.getElementById("commentaryline").innerHTML = "You Lose! Scissors beats Paper";
+            document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
+            document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
         }
     }
     else if(playerSelection == "scissors") {
         if (computerSelection == "paper") {
             playerScore = ++playerScore;
-            return "You Win! Scissors beats Paper"
+            document.getElementById("commentaryline").innerHTML = "You Win! Scissors beats Paper";
+            document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
+            document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
         }
         else if (computerSelection == "rock") {
             computerScore = ++computerScore;
-            return "You Lose! Rock beats Scissors"
+            document.getElementById("commentaryline").innerHTML = "You Lose! Rock beats Scissors";
+            document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
+            document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
         }
     }
-    else {
-        return "Enter a valid input!"
+    winCheck();
+}
+
+const rockSelected = document.getElementById("rock");
+const paperSelected = document.getElementById("paper");
+const scissorsSelected = document.getElementById("scissors");
+
+function rockFunction() {
+    playRound("rock",computerPlay());
+}
+
+function paperFunction() {
+    playRound("paper",computerPlay());
+}
+
+function scissorsFunction() {
+    playRound("scissors",computerPlay());
+}
+
+rockSelected.addEventListener("click", rockFunction);
+paperSelected.addEventListener("click",paperFunction);
+scissorsSelected.addEventListener("click",scissorsFunction);
+
+
+
+function winCheck() {
+    if (playerScore == 5) {
+        document.getElementById("commentaryline").innerHTML = "You Won The Match! Great Job!";
+        document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
+        document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
+        playerScore = 0;
+        computerScore = 0;
+
+    }
+    else if (computerScore == 5) {
+        document.getElementById("commentaryline").innerHTML = "You Lost The Match! Better Luck Next Time!";
+        document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
+        document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
+        playerScore = 0;
+        computerScore = 0;
     }
 }
 
-function game() {
-    playerScore = 0;
-    computerScore = 0;
-    // for (let i = 0; i < 5; i++) {
-    //     console.log(playRound());
-    //     console.log("Player Score = " + playerScore);
-    //     console.log("Computer Score = " + computerScore);
-    // }
-    if (playerScore == computerScore) {
-        return "It's a Tie"
-    }
-    else if (playerScore > computerScore) {
-        return "You Win!"
-    }
-    else if (playerScore < computerScore) {
-        return "You Lose!"
-    }
-    else {
-        return "Something Went Wrong!"
-    }
-}
