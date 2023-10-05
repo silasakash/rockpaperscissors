@@ -1,97 +1,65 @@
 let playerScore = 0;
 let computerScore = 0;
+
+const commentaryLine = document.getElementById("commentaryline");
+const humanScoreDisplay = document.getElementById("humanscore");
+const computerScoreDisplay = document.getElementById("computerscore");
+
+const weapons = ["rock", "paper", "scissors"];
+const selectButtons = document.querySelectorAll(".select button");
+
+selectButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+    const playerSelection = button.id;
+    const computerSelection = computerPlay();
+    playRound(playerSelection, computerSelection);
+    });
+});
+
 function computerPlay() {
-    const  list1 = ['rock','paper','scissors'];
-    let randomPick = list1[Math.floor(Math.random() * list1.length)];
-    return randomPick;
+  return weapons[Math.floor(Math.random() * weapons.length)];
 }
 
-function playRound(playerSelection,computerSelection) {
-    if (playerSelection == computerSelection) {
-        document.getElementById("commentaryline").innerHTML = "It's a Tie!";
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection) {
+        updateCommentary("It's a Tie!");
+    } else if (
+        (playerSelection === "rock" && computerSelection === "scissors") ||
+        (playerSelection === "paper" && computerSelection === "rock") ||
+        (playerSelection === "scissors" && computerSelection === "paper")
+    ) {
+        updateCommentary(`You Win! ${playerSelection} beats ${computerSelection}`);
+    playerScore++;
+    } else {
+        updateCommentary(`You Lose! ${computerSelection} beats ${playerSelection}`);
+        computerScore++;
     }
-    else if(playerSelection == "rock") {
-        if (computerSelection == "paper") {
-            computerScore = ++computerScore;
-            document.getElementById("commentaryline").innerHTML = "You Lose! Paper beats Rock";
-            document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
-            document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
-        }
-        else if (computerSelection == "scissors") {
-            playerScore = ++playerScore;
-            document.getElementById("commentaryline").innerHTML = "You Win! Rock beats Scissors";
-            document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
-            document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
-        }
-    }
-    else if(playerSelection == "paper") {
-        if (computerSelection == "rock") {
-            playerScore = ++playerScore;
-            document.getElementById("commentaryline").innerHTML = "You Win! Paper beats Rock";
-            document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
-            document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
-        }
-        else if (computerSelection == "scissors") {
-            computerScore = ++computerScore;
-            document.getElementById("commentaryline").innerHTML = "You Lose! Scissors beats Paper";
-            document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
-            document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
-        }
-    }
-    else if(playerSelection == "scissors") {
-        if (computerSelection == "paper") {
-            playerScore = ++playerScore;
-            document.getElementById("commentaryline").innerHTML = "You Win! Scissors beats Paper";
-            document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
-            document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
-        }
-        else if (computerSelection == "rock") {
-            computerScore = ++computerScore;
-            document.getElementById("commentaryline").innerHTML = "You Lose! Rock beats Scissors";
-            document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
-            document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
-        }
-    }
+
+    updateScores();
     winCheck();
 }
 
-const rockSelected = document.getElementById("rock");
-const paperSelected = document.getElementById("paper");
-const scissorsSelected = document.getElementById("scissors");
-
-function rockFunction() {
-    playRound("rock",computerPlay());
+function updateCommentary(message) {
+    commentaryLine.textContent = message;
 }
 
-function paperFunction() {
-    playRound("paper",computerPlay());
+function updateScores() {
+    humanScoreDisplay.textContent = `Player: ${playerScore}`;
+    computerScoreDisplay.textContent = `Computer: ${computerScore}`;
 }
-
-function scissorsFunction() {
-    playRound("scissors",computerPlay());
-}
-
-rockSelected.addEventListener("click", rockFunction);
-paperSelected.addEventListener("click",paperFunction);
-scissorsSelected.addEventListener("click",scissorsFunction);
-
-
 
 function winCheck() {
-    if (playerScore == 5) {
-        document.getElementById("commentaryline").innerHTML = "You Won The Match! Great Job!";
-        document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
-        document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
-        playerScore = 0;
-        computerScore = 0;
-
-    }
-    else if (computerScore == 5) {
-        document.getElementById("commentaryline").innerHTML = "You Lost The Match! Better Luck Next Time!";
-        document.getElementById("humanscore").innerHTML = `Human: ${playerScore}`;
-        document.getElementById("computerscore").innerHTML = `Computer: ${computerScore}`;
-        playerScore = 0;
-        computerScore = 0;
+    if (playerScore === 5) {
+        updateCommentary("You Won The Match! Great Job!");
+        resetScores();
+    } else if (computerScore === 5) {
+        updateCommentary("You Lost The Match! Better Luck Next Time!");
+        resetScores();
     }
 }
 
+function resetScores() {
+    playerScore = 0;
+    computerScore = 0;
+    updateScores();
+}
